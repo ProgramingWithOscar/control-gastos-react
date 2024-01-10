@@ -4,13 +4,14 @@ import IconoNuevoGasto from "./img/nuevo-gasto.svg";
 import Modal from "./components/modal/modal";
 import { generarId } from "./components/helpers";
 import ListadoGastos from "./components/gastos/ListadoGastos";
-
+import Filtros from "./components/filtros/Filtros";
 
 function App() {
   const [presupuesto, setPresupuesto] = useState(() => Number((localStorage.getItem('presupuesto')) ?? 0 ));
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
   const [modal, setModal] = useState(false);
   const [animarModal, setAnimarModal] = useState(false);
+  const categories = ["Ahorro", "Comida", "Casa", "Gastos Varios", "Ocio", "Salud", "Suscripciones"];
 
   const [gastos, setGastos] = useState(
     localStorage.getItem('gastos') ? JSON.parse(localStorage.getItem('gastos')): []
@@ -18,6 +19,11 @@ function App() {
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
   const [gastoEditar, setGastoEditar] = useState({});
+  const [filtro, setFiltro] = useState('');
+  const [gastosFiltrados, setGastosFiltrados] = useState([]);
+
+
+
   console.log('valid' , isValidPresupuesto)
   useEffect(()=> {
     if(Object.keys(gastoEditar).length > 0){
@@ -46,6 +52,11 @@ function App() {
      
     
   }, [])
+
+  useEffect(() => {
+    const gastosFiltrados = gastos.filter( gasto => gasto.categoria === filtro)
+    setGastosFiltrados(gastosFiltrados);
+  }, [filtro])
 
   const handleNuevoGasto = () => {
     setModal(true);
@@ -97,6 +108,7 @@ function App() {
           gastado={gastado}
           setGastado={setGastado}
           gastos ={gastos}
+          setGastos={setGastos}
           presupuesto={presupuesto}
           setPresupuesto={setPresupuesto}
           isValidPresupuesto={isValidPresupuesto}
@@ -107,7 +119,8 @@ function App() {
       {isValidPresupuesto && (
         <>
         <main>
-          <ListadoGastos gastos={gastos} setGastoEditar={setGastoEditar} eliminarGasto={eliminarGasto} />
+          <Filtros setFiltro={setFiltro} filtro={filtro} categories={categories}></Filtros>
+          <ListadoGastos  filtro={filtro} gastosFiltrados={gastosFiltrados} gastos={gastos} setGastoEditar={setGastoEditar} eliminarGasto={eliminarGasto} />
         </main> 
         <div className="nuevo-gasto">
           <img src={IconoNuevoGasto} alt="icono nuevo gasto" onClick={handleNuevoGasto} />
@@ -116,6 +129,7 @@ function App() {
       )}
 
       {modal && <Modal 
+      categories = {categories}
        gastoEditar={gastoEditar}
        gastado={gastado}
        disponible={disponible}
@@ -125,6 +139,10 @@ function App() {
        guardarGasto ={ guardarGasto}
        setGastoEditar={setGastoEditar}
         />}
+
+        <footer className="">
+        <p>Derechos de Autor: OSCAR EDUARDO POVEDA LOZADA</p>  
+        </footer>
      </div>  
     </>
   );

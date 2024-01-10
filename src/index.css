@@ -77,7 +77,7 @@ header h1 {
     color: var(--blanco);
     margin-bottom: 4rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid var(--azul);
+    border-bottom: 2px solid var(--green-oscure);
 }
 .formulario .campo {
     display: grid;
@@ -217,7 +217,7 @@ header h1 {
 }
 .reset-app {
     border: none;
-    background-color: #db2777;
+    background-color: #4F6F52;
     padding: 1rem;
     width: 100%;
     text-align: center;
@@ -229,7 +229,7 @@ header h1 {
     transition-duration: 300ms;
 }
 .reset-app:hover {
-    background-color: #c71465;
+    background-color: green;
     cursor: pointer;
 }
 
@@ -258,6 +258,7 @@ main {
 
 .listado-gastos {
     margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 .listado-gastos h2 {
     color: var(--gris-oscuro);
@@ -407,3 +408,14 @@ body .modal {
     font-size: 2.4rem;
     text-align: right;
 }
+footer {
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--green-oscure);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    height: 40px;
+}
+

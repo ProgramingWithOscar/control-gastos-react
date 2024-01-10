@@ -10,6 +10,7 @@ const Header = ({
   setDisponible,
   gastado,
   setGastado,
+  setGastos
 }) => {
   return (
     <header>
@@ -22,7 +23,10 @@ const Header = ({
           gastado={gastado}
           setGastado={setGastado}
           gastos={gastos}
+          setGastos={setGastos}
           presupuesto={presupuesto}
+          setPresupuesto= {setPresupuesto}
+          setIsValidPresupuesto= {setIsValidPresupuesto}
         />
       ) : (
         <NuevoPresupuesto

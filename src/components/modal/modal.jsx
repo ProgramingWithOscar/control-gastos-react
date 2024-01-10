@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import CerrarModal from "../../img/cerrar.svg";
 import Mensaje from "../Mensaje";
-const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, disponible, gastoEditar, setGastoEditar }) => {
+const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, disponible, gastoEditar, setGastoEditar, categories }) => {
 
   const [nombre, setNombre] = useState('');
   const [cantidad, setCantidad] = useState('');
@@ -27,7 +27,6 @@ const Modal = ({ setModal, animarModal, setAnimarModal, guardarGasto, disponible
       setId(gastoEditar.id);
     }
   }, [gastoEditar])
-  const categories = ["Ahorro", "Comida", "Casa", "Gastos Varios", "Ocio", "Salud", "Suscripciones"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
